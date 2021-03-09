@@ -4,23 +4,97 @@
 !function(){var e=window.rudderanalytics=window.rudderanalytics||[];e.methods=["load","page","track","identify","alias","group","ready","reset","getAnonymousId","setAnonymousId"],e.factory=function(t){return function(){var r=Array.prototype.slice.call(arguments);return r.unshift(t),e.push(r),e}};for(var t=0;t<e.methods.length;t++){var r=e.methods[t];e[r]=e.factory(r)}e.loadJS=function(e,t){var r=document.createElement("script");r.type="text/javascript",r.async=!0,r.src="https://cdn.rudderlabs.com/v1/rudder-analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(r,a)},e.loadJS(),
  e.load("1pH5hsBkmApjaAVZkCJkHsAt2ij", "https://theretargeting.com"),e.page()}(); 
 </script>
-	
-	
-	<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KCRS4V7');</script>
-<!-- End Google Tag Manager -->
+	<script>
+
+        var form = document.getElementById('testForm');
+        form.addEventListener('submit', logSubmit);
+
+
+
+
+        function logSubmit(event) {
+            event.preventDefault();
+
+            var fname = form.elements["fname"].value;
+            var lname = form.elements["lname"].value;
+            var email = form.elements["email"].value;
+            var phone = form.elements["phone"].value;
+            var address = form.elements["address"].value;
+            var website = form.elements["website"].value;
+            var event = form.elements["event"].value;
+
+
+            rudderanalytics.identify(
+                {
+                    email: email,
+                    fname: fname,
+                    fname: fname,
+                    phone: phone,
+                    address: address,
+                    website: website,
+                    event: event
+
+                },
+                {
+                    page: {
+                        path: "",
+                        referrer: "",
+                        search: "",
+                        title: "",
+                        url: ""
+                    }
+                }
+            );
+        }
+    </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $( document ).ready(function() {
+    rudderanalytics.page();//track page info
+});
+$(document).ready(function (){
+        var ip = "";
+        var city = "";
+        var country = "";
+
+        $.getJSON('https://json.geoiplookup.io/', function (data) {
+            ip = data.ip;
+            city = data.city;
+            country = data.country_name;
+            setValues();
+        });
+        function setValues() {
+            rudderanalytics.track(
+                "GIT_Visits",
+                {
+                    country: country,
+                    city: city,
+                },
+                {
+                    context: {
+                        ip: ip
+                    },
+                }
+            );
+
+        }
+  });
+  </script>
+	<script>
+function trackSearch() {
+            var searchText = document.getElementById("searchText").value
+            rudderanalytics.track('Products Searched', {
+                query: searchText
+
+            });
+        }
+</script>
+
 	<title>GIT  STORE</title>
 	
 </head>
 <body data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.991.0" data-new-gr-c-s-loaded="14.991.0">
-	<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCRS4V7"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+	
 <form id="testForm">
 <table>
 	<tbody>
